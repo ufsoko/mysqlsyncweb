@@ -1,0 +1,20 @@
+{
+     "source":"dev:123456@(172.16.124.1:3306)/nul_",
+     "dest":"root:root@(172.16.0.55:3306)/nul_",
+     "alter_ignore":{
+        //"tb1*":{
+        //    "column":["aaa","a*"],
+        //    "index":["aa"],
+        //    "foreign":[]
+       // }
+     },
+     //  tables: table to check schema,default is all.eg :["order_*","goods"]
+     "tables":[],
+     "email":{
+     //     "send_mail":false,
+     //    "smtp_host":"smtp.163.com:25",
+     //    "from":"xxx@163.com",
+     //    "password":"xxx",
+     //    "to":"xxx@163.com"
+     }
+}

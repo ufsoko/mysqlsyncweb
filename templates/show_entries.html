@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block body %}
+
+ 
+  <form action="{{ url_for('index') }}" method=post class=add-entry>
+	<div class="container">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="boxl">
+				<dt>Source:
+				<dd>IP:<input type=text size=30 name=srsip>
+				<dd>USER:<input type=text size=30 name=srcuser>
+				<dd>PASS:<input type=text size=30 name=srcpass>
+				<dd>PORT:<input type=text size=30 name=srcport>
+				<dd><input type=submit value=Share>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			<div class="boxr">
+				<dt>Dest:
+				<dd>IP:<input type=text size=30 name=desip>
+				<dd>USER:<input type=text size=30 name=desuser>
+				<dd>PASS:<input type=text size=30 name=despass>
+				<dd>PORT:<input type=text size=30 name=desport>
+				<dd><input type=submit value=Share>
+			</div>
+		</div>
+	</div>
+  {% for entry in entries %}
+    <li>
+		<input type=checkbox name=uids value={{ entry }} >{{ entry }}
+	</li>
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em></li>
+  {% endfor %}
+  
+  {% if getdb=='F' %}
+	<input type=submit value=Next>
+  {% else %}
+	<input type=submit value=Sync>
+  {% endif %}
+  </form>
+
+{% endblock %}
