@@ -1,9 +1,12 @@
 import MySQLdb
+import json
+import os
 class Mysqldb():
     def __init__(self):
         self.db = None
         self.isInit = False
         self.saveD = {}
+        self.jsonC = JsonFile("./bin/config")
 
     def setInfo(self,hostdb,userdb,passwddb,portdb=3306):
         if self.db:
@@ -52,3 +55,31 @@ class Mysqldb():
         if k in self.saveD.keys():
             return self.saveD[k]
         return None
+
+class JsonFile():
+    def __init__(self,file):
+        self.bestjson = json.load(open(file,"r"))
+        self.jsonfile = []
+
+    def createJson(self,sourceinfo,destinfo,dbname):
+        self.bestjson['source'] = str(sourceinfo[1])+":"+str(sourceinfo[2])+"@("+str(sourceinfo[0])+":"+str(sourceinfo[3])+")/"+str(dbname)
+        self.bestjson['dest'] = str(destinfo[1]) + ":" + str(destinfo[2]) + "@(" + str(destinfo[0]) + ":" + str(destinfo[3]) + ")/" + str(dbname)
+        file = './bin/'+ str(destinfo[0]) + '_'+ dbname+'-config.json'
+        self.jsonfile.append(file)
+        json.dump(self.bestjson, open(file, 'w'))
+
+    def cleanJson(self):
+        filelist = os.listdir('./bin/')
+        for f in filelist:
+            if 'json' in f.split('.',1):
+                self.jsonfile.append('./bin/'+f)
+        self.deleteJson()
+
+    def getjsonFile(self):
+        return self.jsonfile
+
+    def deleteJson(self):
+        for f in self.jsonfile:
+            print "del"+f
+            os.remove(f)
+        self.jsonfile = []
