@@ -33,6 +33,7 @@ input           { text-align: left }
         border: 0px solid red;
         text-align: right;
         width: 70%;
+		padding-bottom: 10px;
     }
 	.boxl{
 		border: 0px solid black;
@@ -45,6 +46,7 @@ input           { text-align: left }
         border: 0px solid red;
         text-align: right;
         width: 70%;
+		padding-bottom: 10px;
     }
     .boxbox{
 		border: 0px solid black;
