@@ -84,5 +84,5 @@ def index():
     return render_template('show_entries.html',getdb='F')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=1236)
+    app.run(host='0.0.0.0',port=1238)
     pass

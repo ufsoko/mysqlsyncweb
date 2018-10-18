@@ -7,52 +7,63 @@
     <form action="{{ url_for('index') }}" method=post class=add-entry>
 {% endif %}
 	<div class="container">
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-			<div class="boxl">
-					<dt>Source:
-					<dd>IP:<input type=text size=30 name=srsip value={{ sourceinp[0] if sourceinp }}>
-					<dd>USER:<input type=text size=30 name=srcuser value={{ sourceinp[1] if sourceinp }}>
-					<dd>PASS:<input type=text size=30 name=srcpass value={{ sourceinp[2] if sourceinp }}>
-					<dd>PORT:<input type=text size=30 name=srcport  value=3306>
-				<div class="boxbox">
-					{% for db in sourcedb %}
-						<li>
-							<input type=checkbox name=uids value={{ db }} >{{ db }}
-						</li>
+		<table border="0" width="100%">
+                    <tr>
+                        <td valign="top">
+							<div class="boxl">
+								<dt><h3>Source:</h3></dt>
+								<div class="boxrinput">
+									<dd>IP:<input type=text size=30 name=srsip value={{ sourceinp[0] if sourceinp }}></dd>
+									<dd>USER:<input type=text size=30 name=srcuser value={{ sourceinp[1] if sourceinp }}></dd>
+									<dd>PASS:<input type=text size=30 name=srcpass value={{ sourceinp[2] if sourceinp }}></dd>
+									<dd>PORT:<input type=text size=30 name=srcport  value=3306></dd>
+								</div>
+								<div class="boxbox">
+									{% for db in sourcedb %}
+										<li>
+											<input type=checkbox name=uids value={{ db }} >{{ db }}
+										</li>
+									{% else %}
+										<li><em>Unbelievable.  No entries here so far</em></li>
+									{% endfor %}
+								</div>
+							</div>
+						</td>
+						<td valign="top">
+							<div class="boxr">
+								<dt><h3>Dest:</h3></dt>
+								<div class="boxlinput">
+									<dd>IP:<input type=text size=30 name=desip value={{ destinp[0] if destinp }}></dd>
+									<dd>USER:<input type=text size=30 name=desuser value={{ destinp[1] if destinp }}></dd>
+									<dd>PASS:<input type=text size=30 name=despass value={{ destinp[2] if destinp }}></dd>
+									<dd>PORT:<input type=text size=30 name=desport value=3306></dd>
+								</div>
+								<div class="boxbox">
+									{% for db in destdb %}
+										<li>
+											{{ db }}
+										</li>
+									{% else %}
+										<li><em>Unbelievable.  No entries here so far</em></li>
+									{% endfor %}
+								</div>
+							</div>
+						</td>
+					</tr>
+					 <tr>
+                        <td colspan="2">
+				<div class="boxb">
+					{% if getdb=='F' %}
+						<input type=submit value=Next>
 					{% else %}
-						<li><em>Unbelievable.  No entries here so far</em></li>
-					{% endfor %}
+						<input type=submit value=Sync>
+					{% endif %}
 				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-			<div class="boxr">
-                <dt>Dest:
-                <dd>IP:<input type=text size=30 name=desip value={{ destinp[0] if destinp }}>
-                <dd>USER:<input type=text size=30 name=desuser value={{ destinp[1] if destinp }}>
-                <dd>PASS:<input type=text size=30 name=despass value={{ destinp[2] if destinp }}>
-                <dd>PORT:<input type=text size=30 name=desport value=3306>
-				<div class="boxbox">
-					{% for db in destdb %}
-						<li>
-							{{ db }}
-						</li>
-			  		{% else %}
-						<li><em>Unbelievable.  No entries here so far</em></li>
-			  		{% endfor %}
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-			<div class="boxb">
-			  	{% if getdb=='F' %}
-					<input type=submit value=Next>
-			  	{% else %}
-					<input type=submit value=Sync>
-			  	{% endif %}
-			</div>
-		</div>
+						</td>
+		 		</tr>
+		</table>
 	</div>
+
   </form>
 
 {% endblock %}
